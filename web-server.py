@@ -11,17 +11,14 @@ import tornado.web
 import tornado.websocket
 import tornado.platform.twisted
 from tornado.httpclient import AsyncHTTPClient, HTTPRequest
-from txcouchbase.bucket import Bucket
 
+#install this before importing anything else, or VERY BAD THINGS happen
+tornado.platform.twisted.install()
+
+from txcouchbase.bucket import Bucket
 import cb_status
 import settings
 
-# fix for pyinstaller packages app to avoid ReactorAlreadyInstalledError
-import sys
-if 'twisted.internet.reactor' in sys.modules:
-    del sys.modules['twisted.internet.reactor']
-
-tornado.platform.twisted.install()
 
 socket_list = []
 bucket_name = settings.BUCKET_NAME
@@ -126,6 +123,8 @@ class ShopHandler(tornado.web.RequestHandler):
     @tornado.gen.coroutine
     def get(self):
         items = yield bucket.get("items")
+        print bucket
+        print items
         items = yield bucket.get_multi(items.value['items'])
         self.render("www/shop.html", items=items)
 
