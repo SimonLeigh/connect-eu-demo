@@ -17,7 +17,8 @@ python --version
 ```
 > Python 2.7.13
 
-```shell which python
+```shell 
+which python
 ```
 > /Users/simon/Documents/git/virtualenvs/couchbasetools/bin/python
 
