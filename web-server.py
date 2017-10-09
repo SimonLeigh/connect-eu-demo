@@ -16,6 +16,11 @@ from txcouchbase.bucket import Bucket
 import cb_status
 import settings
 
+# fix for pyinstaller packages app to avoid ReactorAlreadyInstalledError
+import sys
+if 'twisted.internet.reactor' in sys.modules:
+    del sys.modules['twisted.internet.reactor']
+
 tornado.platform.twisted.install()
 
 socket_list = []
