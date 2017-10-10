@@ -199,3 +199,46 @@ over to android studio... 10:51
 
 Had to download AS 2.3.3 since I'm on 1.x. Office internet is fast so this only takes a minute but it is a 500mb download so ymmv.
 
+10:55 Installed and away we go.
+
+"open existing android studio project" and direct to the Android folder.
+
+>Error:Failed to find target with hash string 'android-25' in: /Users/simon/Library/Android/sdk
+><a href="install.android.platform">Install missing platform(s) and sync project</a>
+
+Clicked install missing platform and follow guidance.
+
+More prompts to install stuff, carry on.
+
+10:59 Gradle then kicks off and downloads deps.
+
+Gradle build completes.
+
+Change the ip/bucket in the config as directed
+
+- **this should really be abstracted to another static config file**
+
+Click run project - I'm missing an emulator, so install one.
+
+Then I have to download the image for the Pixel (I chose this) and Android 8.
+
+Decide to try this on my galaxy s7, so I google how to get developer mode on and turn on USB debugging.
+
+Aborted the virtual device installation and plugged in my phone, can now select it from menu in android studio.
+
+Selected instant run, had to install android 7.0 compatability layer.
+
+Check the sync-gateway output, notice it is complaining database doesn't exist.
+
+- **FAILS on first run because sync gateway config is to call the database charlie - even if you change it to connect to demo bucket. In android project must leave /charlie as it is.**
+
+So, set this back to correct ip and charlie.
+
+Now it works. 11:10
+
+Sync doesn't work from phone because L203 of the sync-gateway config is checking for the wrong document type from the phone.
+
+- **Change shopping-basket to order**
+
+Restart sync gateway with config. Now it all works. 11:18
+
